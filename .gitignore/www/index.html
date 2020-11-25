@@ -1,0 +1,35 @@
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Lego toggle switch</title> <script type="module" src="/build/toggle-switch.esm.js" data-stencil></script> <script nomodule="" src="/build/toggle-switch.js" data-stencil></script> <style>.portal {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        height: 200px;
+        width: 200px;
+        border: aqua 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .portal.hidden {
+        display: none;
+      }</style> </head> <body> <toggle-switch id="switch" type="round"></toggle-switch> <portal-container class="portal hidden"></portal-container> <script>
+    const toggle = document.getElementById('switch');
+    toggle.addEventListener('toggle-change-event', e => {
+      console.log('DOM event', e.detail);
+      let portal = document.querySelector('portal-container');
+      if (e.detail == true) {
+        portal.classList.remove('hidden');
+      }
+      if (e.detail == false) {
+        portal.classList.add('hidden');
+      }
+    });
+  </script> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+  if (registration) {
+    registration.unregister().then(function() { location.reload(true) });
+  }
+  });
+}
+</script></body></html>
